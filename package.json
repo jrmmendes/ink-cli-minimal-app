@@ -1,14 +1,37 @@
 {
-  "name": "ink-cli-app",
+  "name": "@jrmmendes/ink-cli-app",
+  "version": "0.1.0",
   "module": "index.ts",
   "type": "module",
-  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jrmmendes/ink-cli-app.git"
+  },
+  "keywords": [
+    "cli"
+  ],
+  "bin": {
+    "create-cli-app": "./bin.js"
+  },
+  "files": [
+    "dist",
+    "bin.js"
+  ],
+  "scripts": {
+    "clear": "rimraf dist",
+    "test": "FORCE_COLOR=0 NODE_ENV=test bun test",
+    "build": "bun run clear && bun build src/application.tsx --outfile=./dist/bundle.js --target=node --format=esm --minify",
+    "start": "node ./bin.js",
+    "start:dev": "bun ./src/application.tsx",
+    "prepublishOnly": "bun run build"
+  },
   "devDependencies": {
     "@types/bun": "latest",
     "@types/ink": "^2.0.3",
     "@types/ink-testing-library": "^1.0.4",
     "@types/react": "^19.1.2",
     "ink-testing-library": "^4.0.0",
+    "react-devtools-core": "^6.1.1",
     "rimraf": "^6.0.1"
   },
   "peerDependencies": {
